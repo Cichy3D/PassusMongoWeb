@@ -8,7 +8,7 @@ public interface RecordDAO {
 
 	public Record get(String field, String value);
 	public List<Record> list();
-	public boolean add(Record rekord);
+	public boolean add(Record record);
 	
 	
 }

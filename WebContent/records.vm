@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>MongoDB Records</title>
+	<meta charset="UTF-8">
+	<title>MongoDB Records</title>
+	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 </head>
+
+	<script type="text/javascript">
+		$(document).ready(
+		function()
+		{	
+			var x=0;
+			$("#more").click(function(){
+				$("#formTable").append("<tr>"+
+				"<td style='background-color: #f82;'>"+
+				"	<input name='key' type='text' >"+
+				"</td>"+
+				"<td style='background-color: #f82;'>"+
+				"	<input name='val' type='text'>"+
+				"</td></tr>");
+			});
+		});
+	</script>
+
 <body>
 
 	<form action="RecordServlet" method="post">
-		<table style="background-color: #841;" >
+	<table><tr><td>
+		<table id="formTable" style="background-color: #841;" >
 		<tr>
 			<td style="background-color: #e71;">
 				<center>key</center>
@@ -15,28 +35,19 @@
 			<td style="background-color: #e71;">
 				<center>value</center>
 			</td>
-			<td style="background-color: #e71;">
-				<center>action</center>
-			</td>
 		</tr>
 		<tr>
 			<td style="background-color: #f82;">
-				<input name="key" type="text" lenght="30">
+				<input name="key" type="text" >
 			</td>
 			<td style="background-color: #f82;">
-				<input name="val" type="text" lenght="30">
+				<input name="val" type="text">
 			</td>
-			<td style="background-color: #f82;">
-				<input type="button" value="add more">
-			</td>
-		</tr>
-		<tr>
-		<td style="background-color: #f82;" colspan="3">
-			<div align="right"><input type="submit" default="true"></div>
-		</td>
 		</tr>
 		</table>
-		
+	</td></tr><tr><td>
+		<div align="right"> <input id="more" type="button" value="add more"> <input type="submit" default="true"> </div>
+	</td></tr></table>
 	</form>
 	<br/><br/>
 

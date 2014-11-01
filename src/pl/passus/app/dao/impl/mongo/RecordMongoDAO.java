@@ -26,10 +26,12 @@ public class RecordMongoDAO implements RecordDAO {
 	public Record get(String field, String val) {
 		
 		DB db = MongoUtil.getMongoDBSession();
-		BasicDBObject query = new BasicDBObject(field, val);
-		DBCursor cursor = db.getCollection("rekordy").find(query).limit(1);
-		for(DBObject dbObject : cursor){
-			return parseRecord(dbObject);
+		synchronized(db){
+			BasicDBObject query = new BasicDBObject(field, val);
+			DBCursor cursor = db.getCollection("rekordy").find(query).limit(1);
+			for(DBObject dbObject : cursor){
+				return parseRecord(dbObject);
+			}
 		}
 		return null;
 	}
@@ -40,10 +42,12 @@ public class RecordMongoDAO implements RecordDAO {
 		DB db = MongoUtil.getMongoDBSession();
 		List<Record> lista = new LinkedList<>();
 		
-		DBCursor cursor = db.getCollection("rekordy").find();
-		for(DBObject dbObject : cursor){
-			Record r = parseRecord(dbObject);
-			lista.add(r);
+		synchronized(db){
+			DBCursor cursor = db.getCollection("rekordy").find();
+			for(DBObject dbObject : cursor){
+				Record r = parseRecord(dbObject);
+				lista.add(r);
+			}
 		}
 		return lista;
 	}
@@ -66,25 +70,31 @@ public class RecordMongoDAO implements RecordDAO {
 	}
 
 	@Override
-	public boolean add(Record rekord) {
+	public boolean add(final Record record) {
 		
-		Map<String, String> recordMap = new HashMap<>();
-		recordMap.putAll(rekord.getData());
-		recordMap.put("time",rekord.getTime());
+		Thread t = new Thread(){
+			@Override public void run(){
+				Map<String, String> recordMap = new HashMap<>();
+				recordMap.putAll(record.getData());
+				recordMap.put("time",record.getTime());
+				
+				DBObject o = new BasicDBObject(recordMap);
+				
+				DB db = MongoUtil.getMongoDBSession();
+				synchronized(db){
+					db.getCollection("rekordy").insert(o);
+				}
+			}
+		};
+		t.start();
 		
-		DBObject o = new BasicDBObject(recordMap);
-		
-		DB db = MongoUtil.getMongoDBSession();
-		WriteResult result = db.getCollection("rekordy").insert(o);
-		
-		System.out.println("inserted: "+result.getN());
-		if(result.getN()>0){
-			return true;
-		} else {
-			return false;
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		
-		
+
+		return true; // was OK
 	}
 
 }
