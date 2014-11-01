@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.passus.app.dao.RekordDAO;
-import pl.passus.app.dao.factory.RekordDAOFactory;
-import pl.passus.app.dao.impl.mongo.RekordMongoDAO;
+import pl.passus.app.dao.RecordDAO;
+import pl.passus.app.dao.factory.RecordDAOFactory;
+import pl.passus.app.dao.impl.mongo.RecordMongoDAO;
+import pl.passus.app.model.Record;
 
 /**
  * Servlet implementation class Hello
@@ -35,11 +36,13 @@ public class Hello extends HttpServlet {
 		response.getWriter().println("Hello!");
 		System.out.println("Buu");
 		
-		RekordDAO dao = RekordDAOFactory.getMongoInstance();
-		dao.list();
+		RecordDAO dao = RecordDAOFactory.getMongoInstance();
+		List<Record> lista = dao.list();
+		response.getWriter().println(lista);
 		
 		
 		System.out.println("End");
+		response.sendRedirect("mongo.xhtml");
 	}
 
 }
