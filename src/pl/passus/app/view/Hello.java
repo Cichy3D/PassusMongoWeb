@@ -42,7 +42,11 @@ public class Hello extends HttpServlet {
 		
 		
 		System.out.println("End");
-		response.sendRedirect("mongo.xhtml");
+		
+		
+		response.sendRedirect("records.vm");
 	}
+	
+
 
 }

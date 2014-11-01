@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rekordy z bazy</title>
+</head>
+<body>
+
+$recordService.recordList
+
+</body>
+</html>

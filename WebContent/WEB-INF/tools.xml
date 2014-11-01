@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tools>
+    <toolbox scope="session">
+        <tool key="recordService" class="pl.passus.app.service.RecordService" restrictTo="*"/>
+    </toolbox>
+</tools>
