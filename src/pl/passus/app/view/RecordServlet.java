@@ -41,7 +41,7 @@ public class RecordServlet extends HttpServlet {
 		RecordDAO dao = RecordDAOFactory.getMongoInstance();
 		dao.add(record);
 		
-		response.sendRedirect("records.vm");
+		response.sendRedirect("/");
 	}
 
 }
