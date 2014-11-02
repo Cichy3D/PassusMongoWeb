@@ -30,10 +30,10 @@
 		<table id="formTable" style="background-color: #841;" >
 		<tr>
 			<td style="background-color: #e71;">
-				<center>key</center>
+				<center>Key</center>
 			</td>
 			<td style="background-color: #e71;">
-				<center>value</center>
+				<center>Value</center>
 			</td>
 		</tr>
 		<tr>
@@ -52,6 +52,11 @@
 	<br/><br/>
 
 	<table style="background-color: #841;" >
+		<tr>
+			<td style="background-color: #e71;"><center>N</center></td>
+			<td style="background-color: #e71;"><center>Data</center></td>
+			<td style="background-color: #e71;"><center>Time</center></td>
+		</tr>
 		#set($i=0)
 		  #foreach( $rec in $recordService.recordList )
 		    <tr> #set($i=$i+1)
