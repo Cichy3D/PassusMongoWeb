@@ -11,20 +11,25 @@
 		$(document).ready(
 		function()
 		{	
-			var x=0;
+			$("#formTable").append($("#form-row").html());
 			$("#more").click(function(){
-				$("#formTable").append("<tr>"+
-				"<td class='tableOdd'>"+
-				"	<input name='key' type='text' >"+
-				"</td>"+
-				"<td class='tableOdd'>"+
-				"	<input name='val' type='text'>"+
-				"</td></tr>");
+				$("#formTable").append($("#form-row").html());
 			});
 		});
 	</script>
 
 <body>
+
+	<template id="form-row">
+		<tr>
+			<td class="tableOdd">
+				<input name="key" type="text" >
+			</td>
+			<td class="tableOdd">
+				<input name="val" type="text">
+			</td>
+		</tr>
+	</template>
 
 	<form action="RecordServlet" method="post">
 	<table><tr><td>
@@ -35,14 +40,6 @@
 			</td>
 			<td class="tableHeads">
 				<center>Value</center>
-			</td>
-		</tr>
-		<tr>
-			<td class="tableOdd">
-				<input name="key" type="text" >
-			</td>
-			<td class="tableOdd">
-				<input name="val" type="text">
 			</td>
 		</tr>
 		</table>
