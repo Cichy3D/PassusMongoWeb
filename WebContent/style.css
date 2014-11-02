@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.tables{
+	background-color: #841;
+}
+
+.tableHeads{
+	background-color: #e71;
+}
+
+.tableOdd{
+	background-color: #f82;
+}
+
+.tableEven{
+	background-color: #fa4;
+}

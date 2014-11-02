@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>MongoDB Records</title>
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="style.css">
 </head>
 
 	<script type="text/javascript">
@@ -13,10 +14,10 @@
 			var x=0;
 			$("#more").click(function(){
 				$("#formTable").append("<tr>"+
-				"<td style='background-color: #f82;'>"+
+				"<td class='tableOdd'>"+
 				"	<input name='key' type='text' >"+
 				"</td>"+
-				"<td style='background-color: #f82;'>"+
+				"<td class='tableOdd'>"+
 				"	<input name='val' type='text'>"+
 				"</td></tr>");
 			});
@@ -27,20 +28,20 @@
 
 	<form action="RecordServlet" method="post">
 	<table><tr><td>
-		<table id="formTable" style="background-color: #841;" >
+		<table id="formTable" class="tables" >
 		<tr>
-			<td style="background-color: #e71;">
+			<td class="tableHeads">
 				<center>Key</center>
 			</td>
-			<td style="background-color: #e71;">
+			<td class="tableHeads">
 				<center>Value</center>
 			</td>
 		</tr>
 		<tr>
-			<td style="background-color: #f82;">
+			<td class="tableOdd">
 				<input name="key" type="text" >
 			</td>
-			<td style="background-color: #f82;">
+			<td class="tableOdd">
 				<input name="val" type="text">
 			</td>
 		</tr>
@@ -51,28 +52,28 @@
 	</form>
 	<br/><br/>
 
-	<table style="background-color: #841;" >
+	<table class="tables" >
 		<tr>
-			<td style="background-color: #e71;"><center>N</center></td>
-			<td style="background-color: #e71;"><center>Data</center></td>
-			<td style="background-color: #e71;"><center>Time</center></td>
+			<td class="tableHeads"><center>N</center></td>
+			<td class="tableHeads"><center>Data</center></td>
+			<td class="tableHeads"><center>Time</center></td>
 		</tr>
 		#set($i=0)
 		  #foreach( $rec in $recordService.recordList )
 		    <tr> #set($i=$i+1)
-		    #set($c="#f82")
-		    #if($i%2==0) #set($c="#fa4") #end
-		    <td style="background-color: $c;">$i</td>
-		    <td style="background-color: #841;">
-		    	<table style="background-color: #841;" >
+		    #set($c="tableOdd")
+		    #if($i%2==0) #set($c="tableEven") #end
+		    <td class="$c">$i</td>
+		    <td class="tables">
+		    	<table class="tables" >
 		    		#foreach( $key in $rec.data.keySet() )
 		    			<tr>
-		    			<td style="background-color: $c;">$key</td>
-		    			<td style="background-color: $c;">$rec.data.get($key)</td></tr>
+		    			<td class="$c">$key</td>
+		    			<td class="$c">$rec.data.get($key)</td></tr>
 		    		#end
 		    	</table>
 		    </td>
-		    <td style="background-color: $c;">$rec.time</td></tr>
+		    <td class="$c">$rec.time</td></tr>
 		  #end
 	</table>
 
